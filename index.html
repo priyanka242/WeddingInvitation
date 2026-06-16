@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Suresh & Priyanka</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ── TOKENS ─────────────────────────────────────────────── */
+:root {
+  --ink:       #0c0e1a;
+  --navy:      #111628;
+  --navy2:     #192038;
+  --pearl:     #faf7f2;
+  --gold:      #c9a84c;
+  --gold-soft: #e2c97e;
+  --gold-dim:  rgba(201,168,76,0.18);
+  --gold-line: rgba(201,168,76,0.35);
+  --white:     #ffffff;
+  --muted:     #8b8070;
+  --text-dim:  rgba(255,255,255,0.55);
+  --haldi: #d8a92d;
+  --wedding-gold: #c9a84c;
+  --reception: #d6c2a1;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Jost', sans-serif; background: var(--pearl); color: var(--ink); overflow-x: hidden; }
+
+/* ════════════════════════════════════════
+   SLIDE 1 — HERO (couple photo)
+════════════════════════════════════════ */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background: url('images/couple.jpg') center 30% / cover no-repeat;
+  z-index: 0;
+}
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(11,13,24,0.08) 0%,
+    rgba(11,13,24,0.25) 40%,
+    rgba(11,13,24,0.84) 78%,
+    rgba(11,13,24,0.98) 100%
+  );
+}
+
+.hero-body {
+  position: relative;
+  z-index: 2;
+  padding: 0 28px 80px;
+  width: 100%;
+  animation: fadeUp 1.6s cubic-bezier(.22,1,.36,1) both;
+}
+
+.hero-invite-line {
+  font-size: 0.68rem;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  font-weight: 300;
+  margin-bottom: 18px;
+}
+
+.hero-names {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(4.5rem, 13vw, 8.5rem);
+  font-weight: 400;
+  line-height: 0.92;
+  color: var(--white);
+  letter-spacing: -1px;
+}
+.hero-names .amp {
+  display: block;
+  font-size: 0.65em;
+  font-style: italic;
+  color: var(--gold-soft);
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: 0;
+}
+
+.hero-rule {
+  width: 44px;
+  height: 1px;
+  background: var(--gold);
+  margin: 26px auto 22px;
+  opacity: 0.65;
+}
+
+/* 4-line date block: date / city / date / city */
+.hero-dates { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+
+.hero-date-line {
+  font-size: 0.68rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  font-weight: 300;
+  white-space: nowrap;
+}
+.hero-date-line.date { color: rgba(255,255,255,0.62); }
+.hero-date-line.city { color: var(--gold-soft); opacity: 0.85; margin-bottom: 7px; font-size: 0.63rem; letter-spacing: 5px; }
+
+.hero-scroll {
+  position: absolute;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: rgba(255,255,255,0.2);
+  font-size: 0.58rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  animation: bob 2.4s ease-in-out infinite;
+}
+.hero-scroll-line { width: 1px; height: 30px; background: linear-gradient(to bottom, var(--gold-line), transparent); }
+
+
+.hero-events{
+display:flex;
+justify-content:center;
+align-items:flex-start;
+gap:32px;
+margin-top:10px;
+}
+
+.hero-event{
+text-align:center;
+min-width:140px;
+}
+
+.hero-event-label{
+font-size:.62rem;
+letter-spacing:4px;
+text-transform:uppercase;
+color:#e2c97e;
+margin-bottom:8px;
+font-weight:500;
+}
+
+.hero-event-date{
+font-size:.72rem;
+color:rgba(255,255,255,.82);
+letter-spacing:1px;
+margin-bottom:6px;
+}
+
+.hero-event-city{
+font-size:.68rem;
+color:rgba(255,255,255,.6);
+letter-spacing:3px;
+text-transform:uppercase;
+}
+
+.hero-events-divider{
+width:1px;
+height:65px;
+background:linear-gradient(
+to bottom,
+transparent,
+rgba(201,168,76,.9),
+transparent
+);
+}
+
+
+/* ════════════════════════════════════════
+   SLIDE 2 — OUR STORY
+════════════════════════════════════════ */
+.story-section {
+  background: var(--navy);
+  color: white;
+  text-align: center;
+  padding: 100px 28px;
+}
+
+.section-eye {
+  font-size: 0.6rem;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 500;
+  display: block;
+  margin-bottom: 18px;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--white);
+}
+
+.story-body {
+  max-width: 600px;
+  margin: 40px auto 0;
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 2.1;
+  color: rgba(255,255,255,0.62);
+  letter-spacing: 0.2px;
+}
+.story-body em {
+  font-style: normal;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.08em;
+  color: var(--gold-soft);
+}
+
+.story-pullquote {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.3rem, 3.5vw, 1.9rem);
+  font-style: italic;
+  color: rgba(255,255,255,0.8);
+  max-width: 560px;
+  margin: 52px auto 0;
+  line-height: 1.55;
+  position: relative;
+  padding: 0 16px;
+}
+
+/* ════════════════════════════════════════
+   SLIDE 3 — FAMILY INVITATION
+════════════════════════════════════════ */
+.family-section {
+  position: relative;
+  background: var(--ink);
+  overflow: hidden;
+}
+
+/* full natural image — no fixed height, no crop */
+.family-img-wrap { position: relative; width: 100%; }
+.family-img-wrap img {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: brightness(0.70) saturate(0.85);
+}
+.family-img-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom,
+    rgba(12,14,26,0.10) 0%,
+    rgba(12,14,26,0.00) 30%,
+    rgba(12,14,26,0.00) 60%,
+    rgba(12,14,26,0.92) 100%
+  );
+}
+
+.family-text {
+  text-align: center;
+  padding: 60px 32px 80px;
+  color: white;
+  position: relative;
+  z-index: 2;
+}
+
+.family-text .section-eye { margin-bottom: 20px; }
+
+.family-headline {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.7rem, 4vw, 2.4rem);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--white);
+  line-height: 1.4;
+  max-width: 620px;
+  margin: 0 auto 22px;
+}
+
+.family-body {
+  font-size: 0.92rem;
+  font-weight: 300;
+  color: rgba(255,255,255,0.58);
+  line-height: 1.95;
+  max-width: 500px;
+  margin: 0 auto;
+  letter-spacing: 0.2px;
+}
+
+/* ════════════════════════════════════════
+   EVENTS — full-screen panels, no header
+════════════════════════════════════════ */
+.events-section { background: var(--ink); }
+
+.event-panel {
+  position: relative;
+  height: 90vh;
+  min-height: 520px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+.event-panel + .event-panel { border-top: 1px solid rgba(255,255,255,0.04); }
+
+.event-panel-img { position: absolute; inset: 0; }
+.event-panel-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  transition: transform 12s ease;
+  transform: scale(1.04);
+}
+.event-panel:hover .event-panel-img img { transform: scale(1.10); }
+
+.event-panel-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(10,12,22,0.97) 0%,
+    rgba(10,12,22,0.55) 40%,
+    rgba(10,12,22,0.08) 100%
+  );
+}
+
+.event-panel-content {
+  position: relative;
+  z-index: 2;
+  padding: 48px 36px;
+  width: 100%;
+  max-width: 700px;
+}
+@media (min-width: 900px) { .event-panel-content { padding: 60px 76px; } }
+
+/* Wedding panel gets slightly more bottom space for the larger type */
+.event-panel.wedding .event-panel-content { padding-bottom: 56px; }
+
+.event-name {
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+  color: white;
+  line-height: 0.95;
+  letter-spacing: -1px;
+  margin-bottom: 14px;
+  font-size: clamp(2.8rem, 8vw, 5rem);
+}
+
+/* Wedding name is bigger — it's the main event */
+.event-panel.wedding .event-name {
+  font-size: clamp(3.6rem, 11vw, 7rem);
+  margin-bottom: 18px;
+}
+
+.event-tagline {
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: rgba(255,255,255,0.82);
+  line-height: 1.7;
+  margin-bottom: 24px;
+  max-width: 400px;
+}
+
+/* Date + time row — bright and readable */
+.event-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.75rem;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.90);
+  font-weight: 400;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+/* Wedding date+time is bigger still */
+.event-panel.wedding .event-meta-row {
+  font-size: 0.88rem;
+  color: #ffffff;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.event-divider{
+  width:1px;
+  height:18px;
+  background:linear-gradient(
+    to bottom,
+    transparent,
+    rgba(201,168,76,.95),
+    transparent
+  );
+  flex-shrink:0;
+}
+
+
+.event-time{
+  color:inherit;
+  font-size:inherit;
+  font-weight:inherit;
+}
+
+
+/* Venue sits below on its own, quieter */
+.event-venue {
+  font-size: 0.7rem;
+  letter-spacing: 1.5px;
+  color: rgba(255,255,255,0.52);
+  font-weight: 300;
+  margin-bottom: 28px;
+  line-height: 1.5;
+}
+.event-panel.wedding .event-venue { color: rgba(255,255,255,0.65); font-size: 0.75rem; }
+
+.event-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--gold-soft);
+  text-decoration: none;
+  font-size: 0.72rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 400;
+  border-bottom: 1px solid rgba(201,168,76,0.3);
+  padding-bottom: 3px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.event-link:hover { color: white; border-color: white; }
+.event-link svg { transition: transform 0.2s; }
+.event-link:hover svg { transform: translateX(4px); }
+
+
+.event-accent{width:60px;height:2px;margin-bottom:18px;}
+
+.event-panel.haldi .event-panel-overlay{
+background:linear-gradient(to top,rgba(216,169,45,0.92) 0%,rgba(10,12,22,0.70) 35%,rgba(10,12,22,0.15) 100%);
+}
+.event-panel.haldi .event-accent{background:#d8a92d;}
+
+
+.event-panel.wedding .event-panel-overlay{
+background:linear-gradient(to top,rgba(12,12,12,0.96) 0%,rgba(201,168,76,0.25) 35%,rgba(10,12,22,0.10) 100%);
+}
+.event-panel.wedding .event-accent{background:#c9a84c;}
+.event-panel.wedding .event-name{color:#ffffff;}
+
+.event-panel.reception .event-panel-overlay{
+background:linear-gradient(to top,rgba(25,25,25,0.96) 0%,rgba(214,194,161,0.28) 35%,rgba(10,12,22,0.10) 100%);
+}
+.event-panel.reception .event-accent{background:#d6c2a1;}
+
+
+
+
+/* CINEMATIC PARALLAX */
+.event-panel-img{
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+.timeline-connector{
+  position:absolute;
+  left:50%;
+  bottom:-50px;
+  width:1px;
+  height:100px;
+  background:linear-gradient(to bottom, rgba(201,168,76,.8), transparent);
+  z-index:3;
+}
+
+.timeline-dot{
+  position:absolute;
+  left:50%;
+  bottom:40px;
+  transform:translateX(-50%);
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:#c9a84c;
+  box-shadow:0 0 20px rgba(201,168,76,.6);
+  z-index:3;
+}
+
+
+
+/* IMPROVED EVENT READABILITY */
+.event-tagline{
+  color:rgba(255,255,255,0.82) !important;
+  font-weight:400;
+}
+
+.event-venue{
+  color:rgba(255,255,255,0.78) !important;
+}
+
+.event-link{
+  border:none !important;
+  padding:14px 22px !important;
+  border-radius:999px !important;
+  background:rgba(201,168,76,.15);
+  border:1px solid rgba(201,168,76,.45) !important;
+  color:#fff !important;
+  font-weight:500 !important;
+  letter-spacing:1.5px !important;
+  transition:all .25s ease;
+}
+
+.event-link:hover{
+  background:#c9a84c !important;
+  color:#111628 !important;
+  transform:translateY(-2px);
+}
+
+.event-link svg{
+  margin-left:2px;
+}
+
+
+
+
+.event-time{
+  color:inherit;
+  font-size:inherit;
+  font-weight:inherit;
+}
+
+
+.event-link{
+background:#ffffff !important;
+color:#111628 !important;
+border:none !important;
+font-weight:600 !important;
+}
+
+.event-link:hover{
+background:#e2c97e !important;
+color:#111628 !important;
+}
+
+
+/* ════════════════════════════════════════
+   LIVESTREAM
+════════════════════════════════════════ */
+.live-section { background: var(--navy2); text-align: center; color: white; padding: 96px 28px; }
+.live-section .section-title { color: white; }
+.live-section .section-sub { font-size: 0.88rem; font-weight: 300; color: var(--text-dim); margin-top: 10px; }
+
+.live-card {
+  max-width: 520px;
+  margin: 52px auto 0;
+  border: 1px solid var(--gold-line);
+  border-radius: 4px;
+  padding: 52px 36px;
+  position: relative;
+  background: rgba(255,255,255,0.02);
+}
+.live-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 56px; height: 1px;
+  background: var(--gold); opacity: 0.55;
+}
+.live-pulse {
+  width: 46px; height: 46px;
+  border-radius: 50%;
+  background: var(--gold-dim);
+  border: 1px solid var(--gold-line);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 22px;
+}
+.live-card h3 { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 400; margin-bottom: 12px; }
+.live-card p { font-size: 0.86rem; font-weight: 300; color: var(--text-dim); line-height: 1.9; }
+.live-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  margin-top: 30px; padding: 13px 32px;
+  border: 1px solid var(--gold-line); border-radius: 2px;
+  color: var(--gold-soft); text-decoration: none;
+  font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; font-weight: 400;
+  transition: background 0.25s, color 0.25s;
+}
+.live-btn:hover { background: var(--gold-dim); color: white; }
+
+/* ════════════════════════════════════════
+   COUNTDOWN
+════════════════════════════════════════ */
+.countdown-section { background: var(--ink); text-align: center; color: white; padding: 96px 28px; }
+.countdown-section .section-title { color: white; }
+
+.timer { display: flex; justify-content: center; gap: 0; margin-top: 52px; flex-wrap: wrap; }
+.t-unit { padding: 0 28px; position: relative; }
+.t-unit + .t-unit::before {
+  content: ''; position: absolute; left: 0; top: 50%;
+  transform: translateY(-60%); width: 1px; height: 36px;
+  background: var(--gold-line);
+}
+.t-num { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 8vw, 4.8rem); font-weight: 400; color: var(--white); line-height: 1; display: block; }
+.t-lbl { display: block; margin-top: 10px; font-size: 0.6rem; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); font-weight: 400; }
+
+@media (max-width: 480px) {
+  .t-unit { padding: 0 16px; }
+  .t-unit + .t-unit::before { height: 26px; }
+}
+
+/* ════════════════════════════════════════
+   FOOTER
+════════════════════════════════════════ */
+footer {
+  background: var(--ink);
+  text-align: center;
+  padding: 72px 28px 52px;
+  position: relative;
+}
+footer::before {
+  content: ''; position: absolute; top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 1px; height: 44px;
+  background: linear-gradient(to bottom, var(--gold-line), transparent);
+}
+.footer-names { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 6vw, 3.6rem); font-weight: 400; color: var(--white); letter-spacing: 1px; }
+.footer-names em { font-style: italic; color: var(--gold-soft); }
+.footer-dates { margin-top: 22px; display: flex; flex-direction: column; align-items: center; gap: 5px; }
+.footer-date-row { font-size: 0.6rem; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.26); font-weight: 300; }
+
+/* ════════════════════════════════════════
+   SCROLL ANIMATIONS
+════════════════════════════════════════ */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.9s ease, transform 0.9s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+.stagger > * { opacity: 0; transform: translateY(22px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.stagger.visible > *:nth-child(1) { opacity:1; transform:none; transition-delay:0s; }
+.stagger.visible > *:nth-child(2) { opacity:1; transform:none; transition-delay:0.1s; }
+.stagger.visible > *:nth-child(3) { opacity:1; transform:none; transition-delay:0.2s; }
+.stagger.visible > *:nth-child(4) { opacity:1; transform:none; transition-delay:0.3s; }
+
+/* ── KEYFRAMES ── */
+@keyframes fadeUp { from { opacity:0; transform:translateY(44px); } to { opacity:1; transform:none; } }
+@keyframes bob { 0%,100% { transform:translateX(-50%) translateY(0); } 50% { transform:translateX(-50%) translateY(7px); } }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 600px) {
+  .story-section, .live-section, .countdown-section { padding: 80px 22px; }
+  .family-text { padding: 48px 24px 68px; }
+  .event-panel-content { padding: 32px 22px; }
+  .live-card { padding: 40px 22px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation:none !important; transition:none !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- ════════════ SLIDE 1 — HERO ════════════ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+
+  <div class="hero-body">
+    <div class="hero-invite-line"></div>
+
+    <h1 class="hero-names">
+      Suresh
+      <span class="amp">&amp;</span>
+      Priyanka
+    </h1>
+
+    <div class="hero-rule"></div>
+
+<div class="hero-events">
+  <div class="hero-event">
+    <div class="hero-event-label">Wedding</div>
+    <div class="hero-event-date">Friday, 03 July 2026</div>
+    <div class="hero-event-city">Secunderabad</div>
+  </div>
+
+  <div class="hero-events-divider"></div>
+
+  <div class="hero-event">
+    <div class="hero-event-label">Reception</div>
+    <div class="hero-event-date">Sunday, 05 July 2026</div>
+    <div class="hero-event-city">Vijayawada</div>
+  </div>
+</div>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    scroll
+  </div>
+</section>
+
+
+<!-- ════════════ SLIDE 2 — OUR STORY ════════════ -->
+<section class="story-section">
+  <div style="max-width:720px; margin:0 auto;">
+
+    <div class="reveal">
+      <span class="section-eye">Our Story</span>
+      <h2 class="section-title">Two Paths, One Destination</h2>
+    </div>
+
+    <p class="story-body reveal">
+      Different personalities, different interests, different perspectives.
+
+	  Yet the things that mattered most—our values, dreams, and outlook on life—felt surprisingly familiar.<br>
+
+      What followed were endless conversations, spontaneous trips, shared laughter, unforgettable memories, 
+	  and every emotion that comes with building a life together.<br>
+	  Then came a question.<br>
+      She said yes.<br>
+      Our families said yes.<br>
+      <em>Today, we celebrate the beginning of a lifetime together.</em>
+    </p>
+
+    <p class="story-pullquote reveal">
+      "PS: we found each other."
+    </p>
+
+  </div>
+</section>
+
+
+<!-- ════════════ SLIDE 3 — FAMILY INVITATION ════════════ -->
+<section class="family-section">
+
+  <div class="family-img-wrap reveal">
+    <img src="images/grouppic.jpg" alt="The Kopparapu Family">
+  </div>
+
+  <div class="family-text reveal">
+    <span class="section-eye">KOPPARAPU's FAMILY</span>
+
+    <h2 class="family-headline">
+     A Celebration Of Love, Family & Togetherness<br>
+    </h2>
+
+    <p class="family-body">
+      With hearts full of joy, we warmly invite you to celebrate the wedding
+      as they embark on this beautiful journey together. we seek your blessings and good wishes for a lifetime filled with love, happiness, and togetherness.
+      <br>We look forward to celebrating these cherished moments with you and your family.
+    </p>
+  </div>
+
+</section>
+
+
+<!-- ════════════ EVENTS ════════════ -->
+<section class="events-section">
+
+  <!-- HALDI -->
+  <div class="event-panel haldi">
+    <div class="event-panel-img"><img src="images/haldi.jpg" alt="Haldi Ceremony"></div>
+    <div class="event-panel-overlay"></div>
+    <div class="timeline-dot"></div><div class="timeline-connector"></div><div class="event-panel-content">
+      <div class="event-accent"></div>
+      <h3 class="event-name">Haldi</h3>
+      <p class="event-tagline">A morning painted in turmeric, laughter, and family blessings.</p>
+      <div class="event-meta-row">
+        <span>03 July 2026</span>
+        <span class="event-divider"></span>
+        <span class="event-time">9:00 AM</span>
+      </div>
+      <div class="event-venue">Dr. Homi J Bhabha Convention Centre, Secunderabad</div>
+      <a class="event-link" href="https://www.google.com/maps/search/?api=1&query=Dr+Homi+J+Bhabha+Convention+Centre+Secunderabad" target="_blank">
+        View on Map
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <!-- WEDDING -->
+  <div class="event-panel wedding">
+    <div class="event-panel-img"><img src="images/wedding.jpg" alt="Wedding Ceremony"></div>
+    <div class="event-panel-overlay"></div>
+    <div class="timeline-dot"></div><div class="timeline-connector"></div><div class="event-panel-content">
+      <div class="event-accent"></div>
+      <h3 class="event-name">Wedding</h3>
+      <p class="event-tagline">Under sacred vows and timeless traditions, our forever begins.</p>
+      <div class="event-meta-row">
+        <span>03 July 2026</span>
+        <span class="event-divider"></span>
+        <span class="event-time">Muhurtham: 8:34 PM</span>
+      </div>
+      <div class="event-venue">Dr. Homi J Bhabha Convention Centre, Secunderabad</div>
+      <a class="event-link" href="https://www.google.com/maps/search/?api=1&query=Dr+Homi+J+Bhabha+Convention+Centre+Secunderabad" target="_blank">
+        View on Map
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <!-- RECEPTION -->
+  <div class="event-panel reception">
+    <div class="event-panel-img"><img src="images/reception.jpg" alt="Reception"></div>
+    <div class="event-panel-overlay"></div>
+    <div class="timeline-dot"></div><div class="timeline-connector"></div><div class="event-panel-content">
+      <div class="event-accent"></div>
+      <h3 class="event-name">Reception</h3>
+      <p class="event-tagline">An elegant evening of music, celebration, and cherished memories.</p>
+      <div class="event-meta-row">
+        <span>05 July 2026</span>
+        <span class="event-divider"></span>
+        <span class="event-time">7:00 PM</span>
+      </div>
+      <div class="event-venue">N Convention Center, Bhavanipuram, Vijayawada</div>
+      <a class="event-link" href="https://www.google.com/maps/search/?api=1&query=N+Convention+Center+Bhavanipuram+Vijayawada" target="_blank">
+        View on Map
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ════════════ LIVESTREAM ════════════ -->
+<section class="live-section">
+  <div style="max-width:960px; margin:0 auto;">
+
+    <div class="reveal">
+      <span class="section-eye">Joining Virtually?</span>
+      <h2 class="section-title">Live Stream</h2>
+      <p class="section-sub">For loved ones who cannot be with us in person</p>
+    </div>
+
+    <div class="live-card reveal">
+      <div class="live-pulse">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.5">
+          <circle cx="12" cy="12" r="2"/>
+          <path d="M8.5 8.5a5 5 0 1 0 7.07 7.07"/>
+          <path d="M5.5 5.5a9 9 0 1 0 12.73 12.73"/>
+        </svg>
+      </div>
+      <h3>Watch Live</h3>
+      <p>The live streaming link will be shared here closer to the wedding date. Bookmark this page and return on 03 July 2026.</p>
+      <a class="live-btn" href="#">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+        Coming Soon
+      </a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════════════ COUNTDOWN ════════════ -->
+<section class="countdown-section">
+  <div style="max-width:960px; margin:0 auto;">
+
+    <div class="reveal">
+      <span class="section-eye">The Big Day Is</span>
+      <h2 class="section-title">Counting Down</h2>
+    </div>
+
+    <div class="timer stagger" id="timer-row">
+      <div class="t-unit"><span class="t-num" id="cd-d">00</span><span class="t-lbl">Days</span></div>
+      <div class="t-unit"><span class="t-num" id="cd-h">00</span><span class="t-lbl">Hours</span></div>
+      <div class="t-unit"><span class="t-num" id="cd-m">00</span><span class="t-lbl">Minutes</span></div>
+      <div class="t-unit"><span class="t-num" id="cd-s">00</span><span class="t-lbl">Seconds</span></div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════════════ FOOTER ════════════ -->
+<footer>
+  <div class="footer-names">Suresh <em>&amp;</em> Priyanka</div>
+  <div class="footer-dates">
+    <div class="footer-date-row">Friday · 03 July 2026 · Secunderabad</div>
+    <div class="footer-date-row">Sunday · 05 July 2026 · Vijayawada</div>
+  </div>
+</footer>
+
+
+<!-- ════════════ SCRIPTS ════════════ -->
+<script>
+const wedding = new Date("July 3, 2026 20:34:00").getTime();
+function pad(n){ return String(Math.max(0,n)).padStart(2,'0'); }
+function tick(){
+  const d = wedding - Date.now();
+  document.getElementById('cd-d').textContent = pad(Math.floor(d/864e5));
+  document.getElementById('cd-h').textContent = pad(Math.floor((d%864e5)/36e5));
+  document.getElementById('cd-m').textContent = pad(Math.floor((d%36e5)/6e4));
+  document.getElementById('cd-s').textContent = pad(Math.floor((d%6e4)/1e3));
+}
+setInterval(tick, 1000);
+tick();
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){ e.target.classList.add('visible'); observer.unobserve(e.target); }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal, .stagger').forEach(el => observer.observe(el));
+
+/* Cinematic parallax */
+const panels=document.querySelectorAll('.event-panel');
+window.addEventListener('scroll',()=>{
+ panels.forEach(panel=>{
+   const img=panel.querySelector('.event-panel-img');
+   if(!img) return;
+   const rect=panel.getBoundingClientRect();
+   const speed=rect.top * -0.08;
+   img.style.transform=`translateY(${speed}px)`;
+ });
+},{passive:true});
+
+</script>
+</body>
+</html>
+
+
+<style>
+.event-name{
+  color:#ffffff !important;
+}
+</style>
+
+<style>
+.event-meta-row{
+  font-size:0.82rem !important;
+  font-weight:500 !important;
+  color:rgba(255,255,255,.95) !important;
+  letter-spacing:2px !important;
+}
+
+.event-time{
+  color:inherit !important;
+  font-size:inherit !important;
+  font-weight:inherit !important;
+}
+
+/* Premium glass map button */
+.event-link{
+  background:rgba(255,255,255,.12) !important;
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,.25) !important;
+  color:#ffffff !important;
+  font-weight:500 !important;
+}
+
+.event-link:hover{
+  background:rgba(255,255,255,.22) !important;
+  color:#ffffff !important;
+  transform:translateY(-2px);
+}
+</style>
